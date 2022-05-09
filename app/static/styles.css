@@ -4,3 +4,11 @@ body{
     background-size: cover;
     font-family: 'K2D', sans-serif;
 }
+.indexing{
+    text-align: center;
+    margin-top:180px;
+    
+}
+.separate_button{
+    margin: 20px;
+}
