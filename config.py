@@ -1,7 +1,7 @@
 import os
 class Config:
     SECRET_KEY = os.environ.get('SECRET-_KEY')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://lorraine:gift1234@localhost/watchlist'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://lorraine:gift1234@localhost/pitching'
     pass
     
 class ProdConfig(Config):
@@ -11,7 +11,7 @@ class DevConfig(Config):
     '''
     Dev config class to be used during development process
     '''
-DEBUG = True
+    DEBUG = True
     
       
 
