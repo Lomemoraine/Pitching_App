@@ -1,6 +1,6 @@
 import os
 class Config:
-    SECRET_KEY = 'lorraine'
+    SECRET_KEY ='lorraine'
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://lorraine:gift1234@localhost/pitching'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
     
@@ -12,7 +12,7 @@ class Config:
     # MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     MAIL_USERNAME='lorrainechepkemoi4@gmail.com'
     MAIL_PASSWORD='epxsnxehdzksryik'
-    pass
+    
     
 class ProdConfig(Config):
     pass
