@@ -12,6 +12,7 @@
       <p> {{user.bio}}</p>
     {%else%}
       <p> {{user.username| capitalize}} has no bio </p>
+      <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
     {% endif %}
   </div>
 
@@ -29,12 +30,12 @@
         {% endif %}
     
             {% if user == current_user %}
-        <form  action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
+        <form class="choose" action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
     
-          <input type="file"  name="photo" class="form-control" required>
+          <input  type="file"  name="photo" class="form-control" required>
           <input type="submit">
         </form>
-        <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a
+        
           {% endif %}
     </div>
 
