@@ -1,17 +1,41 @@
 from . import db
 from datetime import datetime
 from flask_login import UserMixin, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
     email = db.Column(db.String(255), nullable=False, unique=True)
-    password = db.Column(db.String(255), nullable=False)
+    pass_secure = db.Column(db.String(255), nullable=False)
     # role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
-    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+     
+    @property #creates a write only class property password
+    def password(self):
+        raise AttributeError('You cannot read the password attribute')
+
+    @password.setter
+    def set_password(self, password):
+        self.pass_secure= generate_password_hash(password)#passing the hash passowrd as a value to pass_secure
+       
+
+    def verify_password(self, password):  #takes in a password ,hashes it and compares it to the hashed password to check if they are the same
+        return check_password_hash(self.pass_secure, password)
 
     def __repr__(self):
-        return f'User {self.username}'
+        return f'User: {self.username}'
+
+    
+
     
 # class Role(db.Model):
 #     __tablename__ = 'roles'
