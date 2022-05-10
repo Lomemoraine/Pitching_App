@@ -8,7 +8,7 @@ class User(UserMixin,db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
-    email = db.Column(db.String(255), nullable=False, unique=True,index=True)
+    email = db.Column(db.String(255),unique=True,index=True)
     password_hash = db.Column(db.String(255))
     pass_secure = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.String(255))
@@ -23,14 +23,14 @@ class User(UserMixin,db.Model):
     @property #creates a write only class property password
     def password(self):
         raise AttributeError('You cannot read the password attribute')
-
+#takes in a password ,hashes it and compares it to the hashed password to check if they are the same
     @password.setter
-    def set_password(self, password):
-        self.pass_secure= generate_password_hash(password)#passing the hash passowrd as a value to pass_secure
+    def password(self, password):
+        self.pass_secure = generate_password_hash(password)#passing the hash passowrd as a value to pass_secure
        
 
-    def verify_password(self, password):  #takes in a password ,hashes it and compares it to the hashed password to check if they are the same
-        return check_password_hash(self.pass_secure, password)
+    def verify_password(self,password):
+        return check_password_hash(self.pass_secure,password)
 
     def __repr__(self):
         return f'User: {self.username}'
@@ -105,3 +105,58 @@ class Upvote(db.Model):
     upvote = db.Column(db.Integer, default=1)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
+    
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        
+
+    def like(cls, id):
+        upvote_pitch = Upvote(user=current_user, pitch_id=id)
+        upvote_pitch.save()
+
+    @classmethod
+    def query_upvotes(cls, id):
+        upvote = Upvote.query.filter_by(pitch_id=id).all()
+        return upvote
+    
+    @classmethod
+    def all_upvotes(cls):
+        upvotes = Upvote.query.order_by('id').all()
+        return upvotes
+    
+    def __repr__(self):
+        return f'{self.user_id}:{self.pitch_id}'
+    
+    
+class Downvote(db.Model):
+    __tablename__ = 'downvotes'
+    id = db.Column(db.Integer, primary_key=True)
+    downvote = db.Column(db.Integer, default=1)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def dislike(cls, id):
+        downvote_pitch = Downvote(user=current_user, pitch_id=id)
+        downvote_pitch.save()
+        
+    @classmethod
+    def query_downvotes(cls, id):
+        downvote = Downvote.query.filter_by(pitch_id=id).all()
+        return downvote
+    
+    @classmethod
+    def all_downvotes(cls):
+        downvotes = Downvote.query.order_by('id').all()
+        return downvotes
+    
+    
+    def __repr__(self):
+        return f'{self.user_id}:{self.pitch_id}'
+    
+    
