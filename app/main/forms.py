@@ -8,3 +8,7 @@ class PitchForm(FlaskForm):
     category = SelectField('Pitch Category', choices=[('One Word Pitch', 'One Word Pitch'), ('Question Pitch', 'Question Pitch'), ('Rhymic Pitch', 'Rhymic Pitch'), ('Twitter Pitch', 'Twitter Pitch'),('Tech Pitch', 'Tech Pitch')],
                            validators=[InputRequired()])
     submit = SubmitField('POST PITCH')
+    
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('Please share something interesting about you.',validators = [InputRequired()])
+    submit = SubmitField('Submit')

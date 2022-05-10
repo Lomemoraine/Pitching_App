@@ -11,6 +11,8 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(255), nullable=False, unique=True,index=True)
     password_hash = db.Column(db.String(255))
     pass_secure = db.Column(db.String(255), nullable=False)
+    bio = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String())
     # role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     # def save(self):
     #     db.session.add(self)
