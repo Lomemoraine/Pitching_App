@@ -3,8 +3,8 @@ from . import main
 from .forms import PitchForm,UpdateProfile
 from .. import db,photos
 
-from ..models import Pitch,User
-from flask_login import login_required
+from ..models import Pitch,User,Comment,Upvote,Downvote
+from flask_login import login_required,current_user
 
 #views
 @main.route('/')
@@ -14,7 +14,7 @@ def index():
     View root page function that returns the index page and its data
     '''
     title = 'Pitch Raine'
-    pitch_form = PitchForm()
+    
     pitches = Pitch.query.all()
     One_Word_Pitch = Pitch.query.filter_by(category='One_Word_Pitch').all()
     Question_Pitch = Pitch.query.filter_by(category='Question_Pitch').all()
@@ -61,4 +61,25 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+@main.route('/posts')
+@login_required
+def posts():
+    pitches = Pitch.query.all()
+    upvotes = Upvote.query.all()
+    user = current_user
+    return render_template('pitch_render.html', pitches=pitches, upvotes=upvotes, user=user)
 
+
+@main.route('/new_post', methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PitchForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        pitch = form.pitch.data
+        category = form.category.data
+        user_id = current_user._get_current_object().id
+        pitch_obj = Pitch(pitch=pitch, title=title, category=category, user_id=user_id)
+        pitch_obj.save()
+        return redirect(url_for('main.index'))
+    return render_template('Newpitch.html', form=form)
