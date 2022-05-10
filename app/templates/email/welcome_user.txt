@@ -1,0 +1,5 @@
+Hello {{user.username}}
+Welcome to Raine's Pitching App where you can make a difference in one second
+We have just seen you have signed up for our application and want to welcome you to the family. 
+Post your Pitches and make a change with us.
+Thank you.
