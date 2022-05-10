@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+{% block content %}
+<div  class="container">
+    <h2 class="text-center" id="posts">Pitches Raine</h2>
+<ul class="nav nav-pills nav-justified nav-fill" role="tablist">
+    <li class="nav-item" >
+        <a id ="cats" class="nav-link" data-toggle="tab" href="#all"><strong>All categories</strong> </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id ="cats" data-toggle="tab" href="#jobs">One Word Pitches</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id ="cats" data-toggle="tab" href="#event">Question Pitches</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id ="cats"data-toggle="tab" href="#ads">Rhymic Pitches</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id ="cats"data-toggle="tab" href="#ads">Twitter Pitches</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id ="cats"data-toggle="tab" href="#ads">Tech Pitches</a>
+      </li>
+</ul>
+{% endblock %}

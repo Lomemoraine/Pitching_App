@@ -13,10 +13,8 @@ class User(UserMixin,db.Model):
     pass_secure = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
-    # role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
-    # def save(self):
-    #     db.session.add(self)
-    #     db.session.commit()
+   
+    
 
     def delete(self):
         db.session.delete(self)
@@ -58,9 +56,52 @@ class Pitch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     user_id = db.Column(db.String, nullable=False)
-    post = db.Column(db.String, nullable=False)
-    comment = db.relationship('Comment', backref='post', lazy='dynamic')
+    pitch = db.Column(db.String, nullable=False)
+    comment = db.relationship('Comment', backref='pitch', lazy='dynamic')
     category = db.Column(db.String, nullable=False)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
     up_vote = db.relationship('Upvote', backref='pitch', lazy='dynamic')
     down_vote = db.relationship('Downvote', backref='pitch', lazy='dynamic')
+    
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def __repr__(self):
+        return f"Pitch Title: {self.title}"
+
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'), nullable=False)
+    comment = db.Column(db.Text())
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_comments(cls, pitch_id):
+        comments = Comment.query.filter_by(pitch_id= pitch_id).all()
+        return comments
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def __repr__(self):
+        return f'Comments: {self.comment}'
+    
+class Upvote(db.Model):
+    __tablename__ = 'upvotes'
+    id = db.Column(db.Integer, primary_key=True)
+    upvote = db.Column(db.Integer, default=1)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
