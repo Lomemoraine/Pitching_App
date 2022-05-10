@@ -12,9 +12,9 @@ class User(UserMixin,db.Model):
     password_hash = db.Column(db.String(255))
     pass_secure = db.Column(db.String(255), nullable=False)
     # role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
+    # def save(self):
+    #     db.session.add(self)
+    #     db.session.commit()
 
     def delete(self):
         db.session.delete(self)
