@@ -89,4 +89,36 @@ def new_pitch():
         return redirect(url_for('main.index'))
     return render_template('Newpitch.html', form=form)
 
+@main.route('/like/<int:id>',methods = ['POST','GET'])
+@login_required
+def like(id):
+    get_pitches = Upvote.query_upvotes(id)
+    valid_string = f'{current_user.id}:{id}'
+    for pitch in get_pitches:
+        to_str = f'{pitch}'
+        print(valid_string+" "+to_str)
+        if valid_string == to_str:
+            return redirect(url_for('main.index',id=id))
+        else:
+            continue
+    new_vote = Upvote(user = current_user, pitch_id=id)
+    new_vote.save()
+    return redirect(url_for('main.index',id=id))
+
+@main.route('/dislike/<int:id>',methods = ['POST','GET'])
+@login_required
+def dislike(id):
+    pitch = Downvote.query_downvotes(id)
+    valid_string = f'{current_user.id}:{id}'
+    for pitched in pitch:
+        to_str = f'{pitched}'
+        print(valid_string+" "+to_str)
+        if valid_string == to_str:
+            return redirect(url_for('main.index',id=id))
+        else:
+            continue
+    new_downvote = Downvote(user = current_user, pitch_id=id)
+    new_downvote.save()
+    return redirect(url_for('main.index',id = id))
+
 

@@ -113,9 +113,9 @@ class Upvote(db.Model):
         db.session.commit()
         
 
-    def like(cls, id):
-        upvote_pitch = Upvote(user=current_user, pitch_id=id)
-        upvote_pitch.save()
+    # def like(cls, id):
+    #     upvote_pitch = Upvote(user=current_user, pitch_id=id)
+    #     upvote_pitch.save()
 
     @classmethod
     def query_upvotes(cls, id):
@@ -142,9 +142,9 @@ class Downvote(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def dislike(cls, id):
-        downvote_pitch = Downvote(user=current_user, pitch_id=id)
-        downvote_pitch.save()
+    # def dislike(cls, id):
+    #     downvote_pitch = Downvote(user=current_user, pitch_id=id)
+    #     downvote_pitch.save()
         
     @classmethod
     def query_downvotes(cls, id):
