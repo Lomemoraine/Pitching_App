@@ -17,4 +17,16 @@ body{
 }
 .background{
     background-color: white;
+    border-radius: 5%;
+}
+.commenting{
+    width:60%;
+
+}
+.left{
+    margin-left: 15px;
+}
+.profile{
+    width: 80%;
+    background-color: rgba(0, 139, 139, 0.5);
 }

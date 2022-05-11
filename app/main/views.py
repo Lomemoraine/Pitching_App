@@ -98,12 +98,12 @@ def like(id):
         to_str = f'{pitch}'
         print(valid_string+" "+to_str)
         if valid_string == to_str:
-            return redirect(url_for('main.index',id=id))
+            return redirect(url_for('main.pitches',id=id))
         else:
             continue
     new_vote = Upvote(user = current_user, pitch_id=id)
     new_vote.save()
-    return redirect(url_for('main.index',id=id))
+    return redirect(url_for('main.pitches',id=id))
 
 @main.route('/dislike/<int:id>',methods = ['POST','GET'])
 @login_required
@@ -114,12 +114,12 @@ def dislike(id):
         to_str = f'{pitched}'
         print(valid_string+" "+to_str)
         if valid_string == to_str:
-            return redirect(url_for('main.index',id=id))
+            return redirect(url_for('main.pitches',id=id))
         else:
             continue
     new_downvote = Downvote(user = current_user, pitch_id=id)
     new_downvote.save()
-    return redirect(url_for('main.index',id = id))
+    return redirect(url_for('main.pitches',id = id))
 
 @main.route('/comment/<int:pitch_id>', methods = ['POST','GET'])
 @login_required

@@ -1,23 +1,11 @@
 {% extends 'base.html'%}
 
 {% block content %}
-<div class="container">
+<div class="container profile">
 <div class="row">
-<!-- displaying  Username-->
-  <div class="col-md-4">
-    <h3> {{user.username| capitalize}} </h3>
-
-    <!--Displaying user bio-->
-    {% if user.bio %}
-      <p> {{user.bio}}</p>
-    {%else%}
-      <p> {{user.username| capitalize}} has no bio </p>
-      <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
-    {% endif %}
-  </div>
 
   <!--Display profile photo-->
-  <div class="col-md-4">
+  
 
     <div class="col-md-4">
         {% if user.profile_pic_path %}
@@ -32,14 +20,30 @@
             {% if user == current_user %}
         <form class="choose" action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
     
-          <input  type="file"  name="photo" class="form-control" required>
+          <input  type="file"  name="photo" class="form-control" required><br>
           <input type="submit">
         </form>
         
           {% endif %}
     </div>
+    
+    <!-- displaying  Username-->
+  <div class="col-md-3">
+    <h3> {{user.username| capitalize}} </h3>
 
+    <!--Displaying user bio-->
+    {% if user.bio %}
+      <p> {{user.bio}}</p>
+    {%else%}
+      <p> {{user.username| capitalize}} has no bio </p>
+      <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
+    {% endif %}
   </div>
+
+<div class="col-md-5">
+    <h4 class="text-center">My Pitches </h4>
+</div>
+
 </div>
 </div>
 {% endblock %}
