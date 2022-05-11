@@ -1,3 +1,22 @@
-
-
-{
+{% macro displayPitches(pitches) %}
+<div class="container-fluid">
+    <div class="row">
+        
+        {% if pitches %}
+            {% for pitch in pitches %}
+        <div class="col-sm-4">
+          <div class="card background">
+            
+              <h5 class="card-header" style="width:18rem">{{pitch.title}}</h5>
+              <div class="card-body">
+              <p class="card-text" style="font-size:18px">{{pitch.pitch}}</p><br>
+              <p class="card-text">Category: {{pitch.category}} </p><br>
+              <p class="card-text">Posted by: {{pitch.user.username}} </p><br>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+</div>
+</div>
+{% endmacro %}

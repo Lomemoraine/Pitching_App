@@ -1,27 +1,51 @@
 {% extends 'base.html'%}
-{% from 'macros.html' import display_pitches%}
+{% import 'macros.html' as macro %}
 {% block content %}
 <div  class="container">
-    <h2 class="text-center" id="posts">Pitches Raine</h2>
+    <h2 class="text-center">Pitches Raine</h2>
 <ul class="nav nav-pills nav-justified nav-fill" role="tablist">
     <li class="nav-item" >
-        <a id ="cats" class="nav-link" data-toggle="tab" href="#all"><strong>All categories</strong> </a>
+        <a  class="nav-link" data-toggle="tab" href="#all">All categories </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id ="cats" data-toggle="tab" href="#jobs">One Word Pitches</a>
+      <a class="nav-link" data-toggle="tab" href="#one">One Word Pitches</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id ="cats" data-toggle="tab" href="#event">Question Pitches</a>
+      <a class="nav-link" data-toggle="tab" href="#question">Question Pitches</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id ="cats"data-toggle="tab" href="#ads">Rhymic Pitches</a>
+      <a class="nav-link" data-toggle="tab" href="#rhymic">Rhymic Pitches</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id ="cats"data-toggle="tab" href="#ads">Twitter Pitches</a>
+        <a class="nav-link" data-toggle="tab" href="#twitter">Twitter Pitches</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id ="cats"data-toggle="tab" href="#ads">Tech Pitches</a>
+        <a class="nav-link" data-toggle="tab" href="#tech">Tech Pitches</a>
       </li>
 </ul>
+<div class="tab-content">
+    <div  class="container tab-pane active " id="all"><br>
+        {{ macro.displayPitches(pitches) }}
+    </div>
+    <div  class="container tab-pane fade " id="one"><br>
+        {{ macro.displayPitches(One_Word_Pitch) }}
+    </div>
+    <div  class="container tab-pane fade" id="question"><br>
+        {{ macro.displayPitches(Question_Pitch) }}
+    </div>
+    <div  class="container tab-pane fade" id="rhymic"><br>
+        {{ macro.displayPitches(Rhymic_Pitch) }}
+        
+    </div>
+    <div  class="container tab-pane fade"id="twitter" ><br>
+        {{ macro.displayPitches(Twitter_Pitch) }}
+        
+    </div>
+    <div  class="container tab-pane fade"id="tech" ><br>
+        {{ macro.displayPitches(Tech_Pitch) }}
+        
+    </div>
+</div>
+</div>
 
 {% endblock %}

@@ -65,9 +65,14 @@ def update_pic(uname):
 @login_required
 def pitches():
     pitches = Pitch.query.all()
+    One_Word_Pitch = Pitch.query.filter_by(category='One Word Pitch').all()
+    Question_Pitch = Pitch.query.filter_by(category='Question Pitch').all()
+    Rhymic_Pitch = Pitch.query.filter_by(category='Rhymic Pitch').all()
+    Twitter_Pitch = Pitch.query.filter_by(category='Twitter Pitch').all()
+    Tech_Pitch = Pitch.query.filter_by(category='Tech Pitch').all()
     upvotes = Upvote.query.all()
     user = current_user
-    return render_template('pitch_render.html', pitches=pitches, upvotes=upvotes, user=user)
+    return render_template('pitch_render.html', pitches=pitches, One_Word_Pitch= One_Word_Pitch, Question_Pitch=Question_Pitch, Rhymic_Pitch=Rhymic_Pitch, Twitter_Pitch=Twitter_Pitch, Tech_Pitch= Tech_Pitch)
 
 
 @main.route('/new_pitch', methods=['GET', 'POST'])
@@ -78,7 +83,7 @@ def new_pitch():
         title = form.title.data
         pitch = form.pitch.data
         category = form.category.data
-        user_id = current_user._get_current_object().id
+        user_id = current_user
         pitch_obj = Pitch(pitch=pitch, title=title, category=category, user_id=user_id)
         pitch_obj.save()
         return redirect(url_for('main.index'))
