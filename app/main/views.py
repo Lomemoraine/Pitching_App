@@ -1,6 +1,6 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from .forms import PitchForm,UpdateProfile
+from .forms import PitchForm,UpdateProfile,CommentForm
 from .. import db,photos
 
 from ..models import Pitch,User,Comment,Upvote,Downvote
@@ -61,18 +61,18 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
-@main.route('/posts')
+@main.route('/pitches')
 @login_required
-def posts():
+def pitches():
     pitches = Pitch.query.all()
     upvotes = Upvote.query.all()
     user = current_user
     return render_template('pitch_render.html', pitches=pitches, upvotes=upvotes, user=user)
 
 
-@main.route('/new_post', methods=['GET', 'POST'])
+@main.route('/new_pitch', methods=['GET', 'POST'])
 @login_required
-def new_post():
+def new_pitch():
     form = PitchForm()
     if form.validate_on_submit():
         title = form.title.data
@@ -83,3 +83,5 @@ def new_post():
         pitch_obj.save()
         return redirect(url_for('main.index'))
     return render_template('Newpitch.html', form=form)
+
+
