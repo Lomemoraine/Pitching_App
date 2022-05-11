@@ -14,6 +14,7 @@
               <p class="card-text">Posted by: {{pitch.user.username}} </p><br>
               <a href="{{url_for('main.like',id = pitch.id)}}"><i class="fa fa-thumbs-up" style="font-size:18px;color: green"></i> {{pitch.up_vote.count()}}</a>
               <a href="{{url_for('main.dislike',id = pitch.id)}}"><i class="fa fa-thumbs-down" style="font-size:18px;color: red"></i> {{pitch.down_vote.count()}}</a>
+              <a href="{{url_for('main.comment',pitch_id = pitch.id)}}" class="btn btn-info btn-sm"> Comment</a>
             </div>
           </div>
         </div>
