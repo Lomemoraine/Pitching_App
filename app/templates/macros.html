@@ -7,12 +7,12 @@
         <div class="col-sm-4">
           <div class="card background">
             
-              <h5 class="card-header" style="width:18rem ;font-size:35px;margin-left:5px">{{pitch.title}}</h5>
+              <h5 class="card-header" style="width:18rem ;font-size:20px;margin-left:5px;font-weight:bold">{{pitch.title}}</h5>
               <div class="card-body">
-              <p class="card-text" style="font-size:25px;margin-left:20px">{{pitch.pitch}}</p><br>
-              <p class="card-text left">Category: {{pitch.category}} </p><br>
-              <p class="card-text left">Posted by: {{pitch.user.username}} </p><br>
-              <p class="card-text left">Date posted: {{pitch.date_posted}} </p><br>
+              <p class="card-text" style="font-size:15px;margin-left:20px">{{pitch.pitch}}</p><br>
+              <p class="card-text left">Category: {{pitch.category}} </p>
+              <p class="card-text left">Posted by: {{pitch.user.username}} </p>
+              <p class="card-text left">Date posted: {{pitch.date_posted}} </p>
               <a href="{{url_for('main.like',id = pitch.id)}}"><i class="fa fa-thumbs-up" style="font-size:18px;color: green;margin:10px"></i> {{pitch.up_vote.count()}}</a>
               <a href="{{url_for('main.dislike',id = pitch.id)}}"><i class="fa fa-thumbs-down" style="font-size:18px;color: red;margin:10px"></i> {{pitch.down_vote.count()}}</a>
               <a href="{{url_for('main.comment',pitch_id = pitch.id)}}" class="btn btn-info btn-sm"> See comments</a>

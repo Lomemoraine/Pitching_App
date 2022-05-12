@@ -15,24 +15,20 @@ def index():
     '''
     title = 'Pitch Raine'
     
-    pitches = Pitch.query.all()
-    One_Word_Pitch = Pitch.query.filter_by(category='One_Word_Pitch').all()
-    Question_Pitch = Pitch.query.filter_by(category='Question_Pitch').all()
-    Rhymic_Pitch = Pitch.query.filter_by(category='Rhymic_Pitch').all()
-    Twitter_Pitch = Pitch.query.filter_by(category='Twitter_Pitch').all()
-    Tech_Pitch = Pitch.query.filter_by(category='Tech_Pitch').all()
-    return render_template('index.html', title=title,pitches=pitches, One_Word_Pitch=One_Word_Pitch,Question_Pitch = Question_Pitch,Rhymic_Pitch = Rhymic_Pitch,Twitter_Pitch = Twitter_Pitch, Tech_Pitch = Tech_Pitch)
+    
+    return render_template('index.html', title=title)
     
     
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
+    pitches = Pitch.query.filter_by(user_id = user.id).order_by(Pitch.date_posted.desc()).all()
     
 
     if user is None:
         abort(404)
 
-    return render_template("profile/profile.html", user = user)
+    return render_template("profile/profile.html", user = user,pitches =pitches)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required

@@ -1,4 +1,5 @@
 {% extends 'base.html'%}
+{% import 'macros.html' as macro %}
 
 {% block content %}
 <div class="container profile">
@@ -28,7 +29,7 @@
     </div>
     
     <!-- displaying  Username-->
-  <div class="col-md-3">
+  <div class="col-md-6">
     <h3> {{user.username| capitalize}} </h3>
 
     <!--Displaying user bio-->
@@ -40,9 +41,14 @@
       <a class="edit" href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
     {% endif %}
   </div>
-
-<div class="col-md-5 pitchesdiv">
+</div><br>
+<div class="row">
+<div class="container pitchesdiv">
     <h4 class="text-center">My Pitches </h4>
+    <div>
+      {{ macro.displayPitches(pitches) }}
+    </div>
+
 </div>
 
 </div>
