@@ -65,12 +65,12 @@ def update_pic(uname):
 @main.route('/pitches')
 # @login_required
 def pitches():
-    pitches = Pitch.query.all()
-    One_Word_Pitch = Pitch.query.filter_by(category='One Word Pitch').all()
-    Question_Pitch = Pitch.query.filter_by(category='Question Pitch').all()
-    Rhymic_Pitch = Pitch.query.filter_by(category='Rhymic Pitch').all()
-    Twitter_Pitch = Pitch.query.filter_by(category='Twitter Pitch').all()
-    Tech_Pitch = Pitch.query.filter_by(category='Tech Pitch').all()
+    pitches = Pitch.query.order_by(Pitch.date_posted.desc()).all()
+    One_Word_Pitch = Pitch.query.filter_by(category='One Word Pitch').order_by(Pitch.date_posted.desc()).all()
+    Question_Pitch = Pitch.query.filter_by(category='Question Pitch').order_by(Pitch.date_posted.desc()).all()
+    Rhymic_Pitch = Pitch.query.filter_by(category='Rhymic Pitch').order_by(Pitch.date_posted.desc()).all()
+    Twitter_Pitch = Pitch.query.filter_by(category='Twitter Pitch').order_by(Pitch.date_posted.desc()).all()
+    Tech_Pitch = Pitch.query.filter_by(category='Tech Pitch').order_by(Pitch.date_posted.desc()).all()
     upvotes = Upvote.query.all()
     user = current_user
     return render_template('pitch_render.html', pitches=pitches, One_Word_Pitch= One_Word_Pitch, Question_Pitch=Question_Pitch, Rhymic_Pitch=Rhymic_Pitch, Twitter_Pitch=Twitter_Pitch, Tech_Pitch= Tech_Pitch)

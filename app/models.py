@@ -124,10 +124,10 @@ class Upvote(db.Model):
         upvote = Upvote.query.filter_by(pitch_id=id).all()
         return upvote
     
-    @classmethod
-    def all_upvotes(cls):
-        upvotes = Upvote.query.order_by('id').all()
-        return upvotes
+    # @classmethod
+    # def all_upvotes(cls):
+    #     upvotes = Upvote.query.order_by('id').all()
+    #     return upvotes
     
     def __repr__(self):
         return f'{self.user_id}:{self.pitch_id}'
@@ -152,10 +152,10 @@ class Downvote(db.Model):
         downvote = Downvote.query.filter_by(pitch_id=id).all()
         return downvote
     
-    @classmethod
-    def all_downvotes(cls):
-        downvotes = Downvote.query.order_by('id').all()
-        return downvotes
+    # @classmethod
+    # # def all_downvotes(cls):
+    # #     downvotes = Downvote.query.order_by('id').all()
+    # #     return downvotes
     
     
     def __repr__(self):

@@ -1,7 +1,7 @@
 import os
 class Config:
     SECRET_KEY ='lorraine'
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://lorraine:gift1234@localhost/pitching'
+    
     UPLOADED_PHOTOS_DEST ='app/static/photos'
     
      #email configurations
@@ -17,16 +17,23 @@ class Config:
 class ProdConfig(Config):
     pass
 
+
+class TestConfig(Config):
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://lorraine:gift1234@localhost/pitching_test'
+    pass
+
 class DevConfig(Config):
     '''
     Dev config class to be used during development process
     '''
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://lorraine:gift1234@localhost/pitching'
     DEBUG = True
     
       
 
 config_options = {
 'development':DevConfig,
-'production':ProdConfig
+'production':ProdConfig,
+'test':TestConfig
 
 }
