@@ -62,7 +62,7 @@ An application that allows users to post one minute pitches. The users will subm
 
 ## Test Driven Development
 * All the tests can be runned by typing the following command on the terminal
-       $Python3 manage.py 
+       $Python3 manage.py test
 ## Technologies Used
 * python3.9
 * Flask 
