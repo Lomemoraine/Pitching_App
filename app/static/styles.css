@@ -30,3 +30,15 @@ body{
     width: 80%;
     background-color: rgba(0, 139, 139, 0.5);
 }
+.edit{
+    font-size: 20px;
+    color:white;
+}
+.bio{
+    font-size: 25px;
+    /* font-style: italic; */
+}
+.pitchesdiv{
+    background-color: #78558389;
+    
+}
