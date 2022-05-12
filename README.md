@@ -48,8 +48,8 @@ An application that allows users to post one minute pitches. The users will subm
 ## Behaviour Driven Development
 * The user sees a landing page with two buttons to  make a pitch and another one to view existing pitches.
 * A user can view pages that have been made in various categories.
-* A logged in user is able to like the pitches they love only<strong> ONCE<strong>.
-* A logged in user can dislike a pitch they do not like only<strong> ONCE<strong>
+* A logged in user is able to like the pitches they love only<strong> ONCE</strong>.
+* A logged in user can dislike a pitch they do not like only<strong> ONCE</strong>
 * A logged in user can view comments made on each pitch and leave their comments as well.
 * On the landing page also,a user sees the sign in link on the navigation bar.
 * A user signs into the system by clicking the sign in nav link ,if they have no account yet,they will   have an option to sign up
